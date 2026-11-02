@@ -72,6 +72,39 @@
   footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 14px; margin-top: 4px; }
   footer a { display: inline-block; padding: 6px 2px; }
   .pusto { text-align: center; color: var(--szary); padding: 30px; }
+  button.zamow { border: 0; width: 100%; font: inherit; font-weight: 700; cursor: pointer; }
+  .zamow.dodano { background: var(--ok); }
+  .koszyk-btn { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 10; border: 0;
+                border-radius: 999px; padding: 13px 22px; font: inherit; font-weight: 700; color: #fff; cursor: pointer;
+                background: linear-gradient(90deg, var(--niebieski), var(--fiolet)); box-shadow: 0 8px 24px rgba(30,27,46,.3);
+                white-space: nowrap; max-width: calc(100vw - 32px); }
+  .koszyk-btn[hidden] { display: none; }
+  body.ma-koszyk { padding-bottom: 80px; }
+  #koszyk { border: 0; border-radius: var(--r-duzy); padding: 0; width: min(520px, calc(100vw - 24px)); max-height: 90vh;
+            color: var(--tekst); box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+  #koszyk::backdrop { background: rgba(10, 6, 25, .55); }
+  #koszyk .glowa { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px;
+                   border-bottom: 1px solid var(--linia); }
+  #koszyk h2 { margin: 0; font-size: 19px; }
+  #koszyk .zamknij { border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: var(--szary);
+                     width: 44px; height: 44px; }
+  #koszyk ul { list-style: none; margin: 0; padding: 6px 18px; max-height: 50vh; overflow: auto; }
+  #koszyk li { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding: 10px 0; border-bottom: 1px solid var(--linia); }
+  #koszyk li .nazwa { font-weight: 600; }
+  #koszyk li .ile { display: flex; align-items: center; gap: 6px; }
+  #koszyk li .ile button { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--linia);
+                           background: var(--tlo); font-size: 18px; cursor: pointer; color: var(--tekst); }
+  #koszyk li .usun { border: 0; background: none; color: #b42318; cursor: pointer; font: inherit; font-size: 14px;
+                     padding: 6px 0; justify-self: start; }
+  #koszyk .stopka-k { padding: 12px 18px 18px; }
+  #koszyk .razem { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; }
+  #koszyk .zamow { margin-top: 12px; }
+  #koszyk .wyczysc { border: 0; background: none; color: var(--szary); text-decoration: underline; cursor: pointer;
+                     font: inherit; font-size: 14px; margin-top: 10px; padding: 6px 0; }
+  .toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); z-index: 11; background: var(--tekst);
+           color: #fff; padding: 8px 14px; border-radius: 10px; font-size: 14px; opacity: 0; transition: opacity .2s;
+           pointer-events: none; max-width: calc(100vw - 32px); }
+  .toast.widoczny { opacity: 1; }
 
   /* Tablet / małe okno: logo średnie. */
   @media (max-width: 900px) {
@@ -138,7 +171,9 @@
         <span class="dost ok">Dostępne od ręki</span>
         
         
-        <a class="zamow " href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Jajko%20%28JAJKO%29" target="_blank" rel="noopener">Zamów</a>
+        <a class="zamow do-koszyka" href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Jajko%20%28JAJKO%29" target="_blank" rel="noopener"
+           data-sku="JAJKO" data-nazwa="Jajko" data-cena="20.00">Zamów</a>
+        
       </div>
     </div>
     
@@ -151,7 +186,9 @@
         <span class="dost ok">Dostępne od ręki</span>
         
         
-        <a class="zamow " href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Sensoryczna%20uprawa%20marchewek%20%28CARROT-GARDEN-BIG%29" target="_blank" rel="noopener">Zamów</a>
+        <a class="zamow do-koszyka" href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Sensoryczna%20uprawa%20marchewek%20%28CARROT-GARDEN-BIG%29" target="_blank" rel="noopener"
+           data-sku="CARROT-GARDEN-BIG" data-nazwa="Sensoryczna uprawa marchewek" data-cena="49.00">Zamów</a>
+        
       </div>
     </div>
     
@@ -164,7 +201,9 @@
         <span class="dost ok">Dostępne od ręki</span>
         
         
-        <a class="zamow " href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Sensoryczny%20zestaw%20na%20start%20%28EGG%20MEAT%29" target="_blank" rel="noopener">Zamów</a>
+        <a class="zamow do-koszyka" href="https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url&amp;entry.1741639183=Sensoryczny%20zestaw%20na%20start%20%28EGG%20MEAT%29" target="_blank" rel="noopener"
+           data-sku="EGG MEAT" data-nazwa="Sensoryczny zestaw na start" data-cena="39.00">Zamów</a>
+        
       </div>
     </div>
     
@@ -174,7 +213,7 @@
   <section class="jak">
     <h2>Jak zamówić</h2>
     <ol>
-      <li><b>Zamów</b> – przycisk przy produkcie otwiera krótki formularz.</li>
+      <li><b>Koszyk</b> – dodaj produkty i kliknij „Złóż zamówienie”: otworzy się krótki formularz z listą produktów.</li>
       <li><b>Potwierdzimy</b> zamówienie i podamy kwotę do zapłaty – BLIK na telefon albo przelew.</li>
       <li><b>Wysyłka</b> Paczkomatem InPost (16,49 zł) albo odbiór osobisty – Wrocław.</li>
     </ol>
@@ -204,6 +243,25 @@
   </footer>
 </div>
 
+
+<button type="button" class="koszyk-btn" id="koszyk-btn" hidden aria-haspopup="dialog">🛒 Koszyk (<span id="koszyk-ile">0</span>) · <span id="koszyk-suma"></span></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="koszyk" aria-labelledby="koszyk-tytul">
+  <div class="glowa"><h2 id="koszyk-tytul">Twój koszyk</h2>
+    <button type="button" class="zamknij" aria-label="Zamknij koszyk">×</button></div>
+  <ul id="koszyk-lista"></ul>
+  <div class="stopka-k">
+    <div class="razem"><span>Razem</span><span id="koszyk-razem"></span></div>
+    <p class="male">+ wysyłka Paczkomatem InPost 16,49 zł albo bezpłatny odbiór – Wrocław.
+      Kwotę do zapłaty potwierdzimy po otrzymaniu zamówienia.</p>
+    <a class="zamow" id="koszyk-zloz" href="#" target="_blank" rel="noopener">Złóż zamówienie</a>
+    <p class="male" id="koszyk-po" hidden>Formularz otworzył się w nowej karcie – podaj w nim dane kontaktowe i dostawę.
+      Po wysłaniu formularza możesz wyczyścić koszyk.</p>
+    <button type="button" class="wyczysc" id="koszyk-wyczysc">Wyczyść koszyk</button>
+  </div>
+</dialog>
+
+
 <dialog id="powiekszenie" aria-label="Powiększone zdjęcie">
   <div><img alt=""><p></p></div>
   <button type="button" aria-label="Zamknij">×</button>
@@ -224,6 +282,82 @@
       });
     });
     d.addEventListener('click', function () { d.close(); });
+  })();
+
+  // Koszyk: w pamięci przeglądarki (localStorage – działa też bez niej, do zamknięcia strony). „Złóż zamówienie”
+  // otwiera formularz Google z listą „Nazwa (SKU) ×N; …” w polu Produkt – serwer rozpozna pozycje po SKU.
+  (function () {
+    var FORM = "https://docs.google.com/forms/d/e/1FAIpQLSe8yH5KC1JaRL_YeHkpCfsLR127Y3M795AAyCIcn4vnw_bIpA/viewform?usp=pp_url\u0026entry.1741639183=";
+    var dlg = document.getElementById('koszyk');
+    if (!FORM || !dlg || !dlg.showModal) return;
+    var KLUCZ = 'koszyk-czarodzieje3d', koszyk = {}, zl = new Intl.NumberFormat('pl-PL', {style: 'currency', currency: 'PLN'});
+    var katalog = {};
+    document.querySelectorAll('a.do-koszyka').forEach(function (a) {
+      katalog[a.dataset.sku] = {nazwa: a.dataset.nazwa, cena: parseFloat(a.dataset.cena)};
+    });
+    try { koszyk = JSON.parse(localStorage.getItem(KLUCZ) || '{}') || {}; } catch (e) { koszyk = {}; }
+    Object.keys(koszyk).forEach(function (sku) {      // produkty zniknęły z katalogu / ceny się zmieniły
+      if (!katalog[sku] || !(koszyk[sku] > 0)) delete koszyk[sku];
+    });
+    function zapisz() { try { localStorage.setItem(KLUCZ, JSON.stringify(koszyk)); } catch (e) {} }
+    var btn = document.getElementById('koszyk-btn'), toast = document.getElementById('toast'), toastT;
+    function pokazToast(t) {
+      toast.textContent = t; toast.classList.add('widoczny');
+      clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('widoczny'); }, 2200);
+    }
+    function odswiez() {
+      var skus = Object.keys(koszyk), ile = 0, suma = 0, lista = document.getElementById('koszyk-lista');
+      lista.innerHTML = '';
+      skus.forEach(function (sku) {
+        var p = katalog[sku], n = koszyk[sku];
+        ile += n; suma += p.cena * n;
+        var li = document.createElement('li');
+        li.innerHTML = '<span class="nazwa"></span><span class="cena-poz"></span>' +
+          '<span class="ile"><button type="button" class="minus" aria-label="Mniej">−</button><span class="n"></span>' +
+          '<button type="button" class="plus" aria-label="Więcej">+</button></span>' +
+          '<button type="button" class="usun">Usuń</button>';
+        li.querySelector('.nazwa').textContent = p.nazwa;
+        li.querySelector('.cena-poz').textContent = zl.format(p.cena * n);
+        li.querySelector('.n').textContent = n + ' szt.';
+        li.querySelector('.minus').onclick = function () { zmien(sku, -1); };
+        li.querySelector('.plus').onclick = function () { zmien(sku, 1); };
+        li.querySelector('.usun').onclick = function () { delete koszyk[sku]; zapisz(); odswiez(); };
+        lista.appendChild(li);
+      });
+      document.getElementById('koszyk-ile').textContent = ile;
+      document.getElementById('koszyk-suma').textContent = zl.format(suma);
+      document.getElementById('koszyk-razem').textContent = zl.format(suma);
+      btn.hidden = ile === 0;
+      document.body.classList.toggle('ma-koszyk', ile > 0);
+      var tekst = skus.map(function (sku) {
+        return katalog[sku].nazwa.replace(/;/g, ',') + ' (' + sku + ') ×' + koszyk[sku];
+      }).join('; ');
+      document.getElementById('koszyk-zloz').href = FORM + encodeURIComponent(tekst);
+      if (ile === 0 && dlg.open) dlg.close();
+    }
+    function zmien(sku, o) {
+      koszyk[sku] = Math.min(99, (koszyk[sku] || 0) + o);
+      if (koszyk[sku] <= 0) delete koszyk[sku];
+      zapisz(); odswiez();
+    }
+    document.querySelectorAll('a.do-koszyka').forEach(function (a) {
+      a.textContent = 'Dodaj do koszyka';
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        zmien(a.dataset.sku, 1);
+        pokazToast('Dodano do koszyka: ' + a.dataset.nazwa);
+        a.classList.add('dodano'); a.textContent = 'Dodano ✓';
+        setTimeout(function () { a.classList.remove('dodano'); a.textContent = 'Dodaj do koszyka'; }, 1500);
+      });
+    });
+    btn.onclick = function () { document.getElementById('koszyk-po').hidden = true; dlg.showModal(); };
+    dlg.querySelector('.zamknij').onclick = function () { dlg.close(); };
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    document.getElementById('koszyk-zloz').addEventListener('click', function () {
+      document.getElementById('koszyk-po').hidden = false;
+    });
+    document.getElementById('koszyk-wyczysc').onclick = function () { koszyk = {}; zapisz(); odswiez(); };
+    odswiez();
   })();
 </script>
 </body>
