@@ -5,43 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Czarodzieje3D – katalog</title>
 <meta name="description" content="Figurki i gadżety z drukarki 3D">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Czarodzieje3D">
+<meta property="og:description" content="Figurki i gadżety z drukarki 3D">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:url" content="https://czarodzieje3d.github.io/">
+<meta property="og:image" content="https://czarodzieje3d.github.io/logo.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#7a3ce0">
 <link rel="icon" href="logo.jpg">
 <style>
-  :root { --fiolet: #7a3ce0; --niebieski: #2f86de; --tlo: #f7f5fc; --karta: #fff; --tekst: #1e1b2e; --szary: #6b6680;
-          --linia: #e6e1f2; --ok: #1d7a46; --ok-tlo: #e3f4ea; --zam: #8a5a00; --zam-tlo: #fdf1dc; }
+  :root { --fiolet: #7a3ce0; --niebieski: #1f6fc4; --tlo: #f7f5fc; --karta: #fff; --tekst: #1e1b2e; --szary: #6b6680;
+          --linia: #e6e1f2; --ok: #1d7a46; --ok-tlo: #e3f4ea; --zam: #8a5a00; --zam-tlo: #fdf1dc;
+          --r-duzy: 16px; --r-maly: 10px; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--tlo); color: var(--tekst); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
   a { color: var(--fiolet); }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
-  header { text-align: center; padding: 28px 0 8px; }
-  header img { width: 132px; height: 132px; object-fit: contain; }
-  h1 { margin: 6px 0 4px; font-size: 28px; background: linear-gradient(90deg, var(--niebieski), var(--fiolet));
+  header { text-align: center; padding: 24px 0 6px; }
+  /* Logo w kole: obwódka w kolorach marki (gradient) + biały odstęp + cień. Obrazek lekko przybliżony
+     (Ustawienia → „Przybliżenie logo”), żeby własna cienka obwódka i biały margines logo nie dublowały krawędzi. */
+  .logo { width: 132px; height: 132px; margin: 0 auto; border-radius: 50%; padding: 4px;
+          background: linear-gradient(135deg, #2f86de, var(--fiolet) 60%, #c04fd8);
+          box-shadow: 0 8px 24px rgba(122, 60, 224, .28), 0 2px 6px rgba(47, 134, 222, .18); }
+  .logo span { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+               background: #fff; border: 3px solid #fff; }
+  .logo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.12); }
+  h1 { margin: 8px 0 2px; font-size: 28px; background: linear-gradient(90deg, #2f86de, var(--fiolet));
        -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .opis { color: var(--szary); margin: 0 auto 16px; max-width: 560px; }
-  .jak { background: var(--karta); border: 1px solid var(--linia); border-radius: 14px; padding: 14px 18px; margin: 8px 0 22px;
-         display: grid; gap: 6px 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); font-size: 15px; }
-  .jak b { color: var(--fiolet); }
+  .opis { color: var(--szary); margin: 0 auto 12px; max-width: 560px; }
+  .skrot { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0 0 18px; padding: 0; list-style: none; }
+  .skrot li { background: var(--karta); border: 1px solid var(--linia); border-radius: 999px; padding: 4px 12px; font-size: 14px; }
+  .skrot a { text-decoration: none; display: block; margin: -4px -12px; padding: 6px 12px; }
   .produkty { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
-  .produkt { background: var(--karta); border: 1px solid var(--linia); border-radius: 16px; overflow: hidden;
+  .produkt { background: var(--karta); border: 1px solid var(--linia); border-radius: var(--r-duzy); overflow: hidden;
              display: flex; flex-direction: column; }
   .produkt img, .produkt .brak { width: 100%; aspect-ratio: 1; object-fit: cover; background: #eee; display: block; }
   .produkt .brak { display: flex; align-items: center; justify-content: center; color: var(--szary); font-size: 40px; }
   .tresc { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .tresc h2 { margin: 0; font-size: 17px; }
+  .tresc h2 { margin: 0; font-size: 17px; line-height: 1.3; }
   .tresc p { margin: 0; color: var(--szary); font-size: 14px; }
   .cena { font-size: 20px; font-weight: 700; }
-  .dost { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 999px; align-self: flex-start; }
+  .dost { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: var(--r-maly); align-self: flex-start; }
   .dost.ok { background: var(--ok-tlo); color: var(--ok); } .dost.zam { background: var(--zam-tlo); color: var(--zam); }
   .zamow { margin-top: auto; display: block; text-align: center; text-decoration: none; font-weight: 700; color: #fff;
-           background: linear-gradient(90deg, var(--niebieski), var(--fiolet)); border-radius: 10px; padding: 11px; }
-  .zamow.wylaczone { background: #ccc; pointer-events: none; }
-  .niestandardowe { text-align: center; background: var(--karta); border: 1px dashed var(--fiolet); border-radius: 16px;
-                    padding: 18px; margin: 26px 0 8px; }
-  .niestandardowe a { display: inline-block; margin-top: 8px; font-weight: 700; }
+           background: linear-gradient(90deg, var(--niebieski), var(--fiolet)); border-radius: var(--r-maly); padding: 11px; }
+  .zamow.wylaczone { background: #e2e2e2; color: #4a4a4a; pointer-events: none; }
+  .jak { background: var(--karta); border: 1px solid var(--linia); border-radius: var(--r-duzy); padding: 14px 18px; margin: 26px 0 0; }
+  .jak h2 { margin: 0 0 8px; font-size: 18px; }
+  .jak ol { margin: 0; padding-left: 20px; display: grid; gap: 4px 28px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .jak li::marker { color: var(--fiolet); font-weight: 700; }
+  .jak b { color: var(--fiolet); }
+  .jak .male { color: var(--szary); font-size: 14px; margin: 10px 0 0; }
+  .niestandardowe { text-align: center; background: var(--karta); border: 1px dashed var(--fiolet); border-radius: var(--r-duzy);
+                    padding: 18px; margin: 16px 0 8px; }
+  .niestandardowe a.cta { display: inline-block; margin-top: 8px; font-weight: 700; padding: 6px 4px; }
+  .niestandardowe .male { color: var(--szary); font-size: 14px; margin: 6px 0 0; }
   footer { color: var(--szary); font-size: 14px; text-align: center; padding: 22px 0 34px; }
-  footer a { margin: 0 6px; }
+  footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 14px; margin-top: 4px; }
+  footer a { display: inline-block; padding: 6px 2px; }
   .pusto { text-align: center; color: var(--szary); padding: 30px; }
-  .zwroty-info { text-align: center; color: var(--szary); font-size: 14px; margin: -10px 0 18px; }
+
+  /* Telefon (ruch z Instagrama): 2 produkty w rzędzie, mniejsze logo, produkty na pierwszym ekranie. */
+  @media (max-width: 600px) {
+    .wrap { padding: 0 12px; }
+    header { padding: 14px 0 2px; }
+    .logo { width: 84px; height: 84px; padding: 3px; }
+    .logo span { border-width: 2px; }
+    h1 { font-size: 24px; margin-top: 4px; }
+    .opis { font-size: 15px; margin-bottom: 10px; }
+    .skrot { margin-bottom: 14px; gap: 5px; }
+    .skrot li { font-size: 13px; padding: 3px 10px; }
+    .skrot a { margin: -3px -10px; padding: 6px 10px; }
+    .produkty { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .tresc { padding: 9px 10px 10px; gap: 4px; }
+    .tresc h2 { font-size: 15px; }
+    .tresc p { font-size: 13px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .cena { font-size: 17px; }
+    .dost { font-size: 12px; padding: 2px 6px; }
+    .zamow { padding: 12px 6px; }
+    .foto::after { width: 26px; height: 26px; line-height: 26px; font-size: 15px; right: 6px; bottom: 6px; }
+  }
   .foto { display: block; position: relative; cursor: zoom-in; }
   .foto::after { content: "⤢"; position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%;
                  background: rgba(0,0,0,.45); color: #fff; font-size: 17px; line-height: 30px; text-align: center; }
@@ -58,18 +103,17 @@
 <body>
 <div class="wrap">
   <header>
-    <img src="logo.jpg" alt="Czarodzieje3D">
+    <div class="logo"><span><img src="logo.jpg" alt="Czarodzieje3D"></span></div>
     <h1>Czarodzieje3D</h1>
     <p class="opis">Figurki i gadżety z drukarki 3D</p>
   </header>
 
-  <div class="jak">
-    <div><b>1. Zamów</b> – przycisk przy produkcie otwiera krótki formularz.</div>
-    <div><b>2. Potwierdzimy</b> zamówienie i podamy kwotę do zapłaty – BLIK na telefon albo przelew.</div>
-    <div><b>3. Wysyłka</b> Paczkomatem InPost (16,49 zł) albo odbiór osobisty – Wrocław.
-      Nie wysyłamy za pobraniem.</div>
-  </div>
-  <p class="zwroty-info">Produkty z katalogu możesz zwrócić w ciągu 14 dni – <a href="zwroty.html">zasady zwrotów i reklamacji</a>.</p>
+  <ul class="skrot" aria-label="W skrócie">
+    <li>💳 BLIK lub przelew</li>
+    <li>📦 Paczkomat 16,49 zł</li>
+    <li>🤝 Odbiór: Wrocław</li>
+    <li><a href="zwroty.html">↩ Zwrot do 14 dni</a></li>
+  </ul>
 
   
   <div class="produkty">
@@ -103,21 +147,37 @@
   </div>
   
 
+  <section class="jak">
+    <h2>Jak zamówić</h2>
+    <ol>
+      <li><b>Zamów</b> – przycisk przy produkcie otwiera krótki formularz.</li>
+      <li><b>Potwierdzimy</b> zamówienie i podamy kwotę do zapłaty – BLIK na telefon albo przelew.</li>
+      <li><b>Wysyłka</b> Paczkomatem InPost (16,49 zł) albo odbiór osobisty – Wrocław.</li>
+    </ol>
+    <p class="male">Ceny są końcowe – doliczamy tylko wysyłkę. Nie wysyłamy za pobraniem.</p>
+    <p class="male"><strong>Bez VAT:</strong> sprzedawca korzysta ze zwolnienia z VAT (art. 113 ust. 1 i 9 ustawy
+      o VAT). Ceny nie zawierają VAT, a na życzenie wystawiamy fakturę bez VAT – firma nie odliczy z niej podatku.</p>
+    <p class="male"> Produkty z katalogu możesz
+      zwrócić w ciągu 14 dni – <a href="zwroty.html">zasady zwrotów i reklamacji</a>.</p>
+  </section>
+
   
   <div class="niestandardowe">
     Masz własny pomysł? Inny kolor, rozmiar, personalizacja?<br>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScK5ZdhjTsDznW7MCnvdoUmIh93jRTXkd5XXWhMF7_TDRqD0g/viewform" target="_blank" rel="noopener">Zamówienie niestandardowe →</a>
-    <div class="zwroty-info" style="margin: 8px 0 0">Rzeczy robione według Twojego projektu nie podlegają zwrotowi
-      (<a href="zwroty.html#wyjatki">dlaczego</a>) – reklamacja wad przysługuje zawsze.</div>
+    <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLScK5ZdhjTsDznW7MCnvdoUmIh93jRTXkd5XXWhMF7_TDRqD0g/viewform" target="_blank" rel="noopener">Zamówienie niestandardowe →</a>
+    <p class="male">Rzeczy robione według Twojego projektu nie podlegają zwrotowi
+      (<a href="zwroty.html#wyjatki">dlaczego</a>) – reklamacja wad przysługuje zawsze.</p>
   </div>
   
 
   <footer>
-    Czarodzieje3D<br>
-    <a href="https://instagram.com/czarodzieje3d" target="_blank" rel="noopener">Instagram</a>
-    <a href="mailto:pebewrc@gmail.com">pebewrc@gmail.com</a>
-    <a href="zwroty.html">Zwroty i reklamacje</a>
-    <a href="prywatnosc.html">Polityka prywatności</a>
+    Czarodzieje3D
+    <nav aria-label="Kontakt i informacje">
+      <a href="https://instagram.com/czarodzieje3d" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:pebewrc@gmail.com">pebewrc@gmail.com</a>
+      <a href="zwroty.html">Zwroty i reklamacje</a>
+      <a href="prywatnosc.html">Polityka prywatności</a>
+    </nav>
   </footer>
 </div>
 
