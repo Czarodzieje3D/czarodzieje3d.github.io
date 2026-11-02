@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Czarodzieje3D – katalog</title>
+<meta name="description" content="Figurki i gadżety z drukarki 3D – robione ręcznie, na zamówienie.">
+<link rel="icon" href="logo.jpg">
+<style>
+  :root { --fiolet: #7a3ce0; --niebieski: #2f86de; --tlo: #f7f5fc; --karta: #fff; --tekst: #1e1b2e; --szary: #6b6680;
+          --linia: #e6e1f2; --ok: #1d7a46; --ok-tlo: #e3f4ea; --zam: #8a5a00; --zam-tlo: #fdf1dc; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--tlo); color: var(--tekst); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  a { color: var(--fiolet); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  header { text-align: center; padding: 28px 0 8px; }
+  header img { width: 132px; height: 132px; object-fit: contain; }
+  h1 { margin: 6px 0 4px; font-size: 28px; background: linear-gradient(90deg, var(--niebieski), var(--fiolet));
+       -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .opis { color: var(--szary); margin: 0 auto 16px; max-width: 560px; }
+  .jak { background: var(--karta); border: 1px solid var(--linia); border-radius: 14px; padding: 14px 18px; margin: 8px 0 22px;
+         display: grid; gap: 6px 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); font-size: 15px; }
+  .jak b { color: var(--fiolet); }
+  .produkty { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .produkt { background: var(--karta); border: 1px solid var(--linia); border-radius: 16px; overflow: hidden;
+             display: flex; flex-direction: column; }
+  .produkt img, .produkt .brak { width: 100%; aspect-ratio: 1; object-fit: cover; background: #eee; display: block; }
+  .produkt .brak { display: flex; align-items: center; justify-content: center; color: var(--szary); font-size: 40px; }
+  .tresc { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .tresc h2 { margin: 0; font-size: 17px; }
+  .tresc p { margin: 0; color: var(--szary); font-size: 14px; }
+  .cena { font-size: 20px; font-weight: 700; }
+  .dost { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 999px; align-self: flex-start; }
+  .dost.ok { background: var(--ok-tlo); color: var(--ok); } .dost.zam { background: var(--zam-tlo); color: var(--zam); }
+  .zamow { margin-top: auto; display: block; text-align: center; text-decoration: none; font-weight: 700; color: #fff;
+           background: linear-gradient(90deg, var(--niebieski), var(--fiolet)); border-radius: 10px; padding: 11px; }
+  .zamow.wylaczone { background: #ccc; pointer-events: none; }
+  .niestandardowe { text-align: center; background: var(--karta); border: 1px dashed var(--fiolet); border-radius: 16px;
+                    padding: 18px; margin: 26px 0 8px; }
+  .niestandardowe a { display: inline-block; margin-top: 8px; font-weight: 700; }
+  footer { color: var(--szary); font-size: 14px; text-align: center; padding: 22px 0 34px; }
+  footer a { margin: 0 6px; }
+  .pusto { text-align: center; color: var(--szary); padding: 30px; }
+  .foto { display: block; position: relative; cursor: zoom-in; }
+  .foto::after { content: "⤢"; position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%;
+                 background: rgba(0,0,0,.45); color: #fff; font-size: 17px; line-height: 30px; text-align: center; }
+  #powiekszenie { border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; }
+  #powiekszenie::backdrop { background: rgba(10, 6, 25, .9); }
+  #powiekszenie div { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center;
+                      justify-content: center; gap: 10px; padding: 16px; box-sizing: border-box; cursor: zoom-out; }
+  #powiekszenie img { width: 100%; height: calc(100% - 50px); object-fit: contain; }
+  #powiekszenie p { margin: 0; color: #fff; font-weight: 600; text-align: center; }
+  #powiekszenie button { position: absolute; top: 12px; right: 12px; width: 42px; height: 42px; border-radius: 50%; border: 0;
+                         background: rgba(255,255,255,.15); color: #fff; font-size: 24px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="logo.jpg" alt="Czarodzieje3D">
+    <h1>Czarodzieje3D</h1>
+    <p class="opis">Figurki i gadżety z drukarki 3D – robione ręcznie, na zamówienie.</p>
+  </header>
+
+  <div class="jak">
+    <div><b>1. Zamów</b> – przycisk przy produkcie otwiera krótki formularz.</div>
+    <div><b>2. Potwierdzimy</b> zamówienie i podamy kwotę do zapłaty – BLIK na telefon albo przelew.</div>
+    <div><b>3. Wysyłka</b> Paczkomatem InPost (16,49 zł) albo odbiór osobisty.</div>
+  </div>
+
+  
+  <div class="produkty">
+    
+    <div class="produkt">
+      <a class="foto" href="img/carrot-garden-big.jpg" target="_blank" aria-label="Powiększ zdjęcie: Sensoryczna uprawa marchewek"><img src="img/carrot-garden-big.jpg" alt="Sensoryczna uprawa marchewek" loading="lazy"></a>
+      <div class="tresc">
+        <h2>Sensoryczna uprawa marchewek</h2>
+        
+        <div class="cena">49,00 zł</div>
+        <span class="dost ok">Dostępne od ręki</span>
+        
+        
+        <a class="zamow wylaczone" href="#" target="_blank" rel="noopener">Zamówienia wkrótce</a>
+      </div>
+    </div>
+    
+  </div>
+  
+
+  
+
+  <footer>
+    Paweł Bernach<br>
+    
+    
+    <a href="prywatnosc.html">Polityka prywatności</a>
+  </footer>
+</div>
+
+<dialog id="powiekszenie" aria-label="Powiększone zdjęcie">
+  <div><img alt=""><p></p></div>
+  <button type="button" aria-label="Zamknij">×</button>
+</dialog>
+<script>
+  // Klik w zdjęcie = powiększenie na cały ekran; klik gdziekolwiek / Esc / × zamyka.
+  // Bez JavaScriptu link otwiera samo zdjęcie w nowej karcie.
+  (function () {
+    var d = document.getElementById('powiekszenie');
+    if (!d || !d.showModal) return;
+    var img = d.querySelector('img'), opis = d.querySelector('p');
+    document.querySelectorAll('a.foto').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var maly = a.querySelector('img');
+        img.src = a.getAttribute('href'); img.alt = maly.alt; opis.textContent = maly.alt;
+        d.showModal();
+      });
+    });
+    d.addEventListener('click', function () { d.close(); });
+  })();
+</script>
+</body>
+</html>
