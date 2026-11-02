@@ -26,11 +26,11 @@
   header { text-align: center; padding: 24px 0 6px; }
   /* Logo w kole: obwódka w kolorach marki (gradient) + biały odstęp + cień. Obrazek lekko przybliżony
      (Ustawienia → „Przybliżenie logo”), żeby własna cienka obwódka i biały margines logo nie dublowały krawędzi. */
-  .logo { width: 132px; height: 132px; margin: 0 auto; border-radius: 50%; padding: 4px;
+  .logo { width: 200px; height: 200px; margin: 0 auto; border-radius: 50%; padding: 5px;
           background: linear-gradient(135deg, #2f86de, var(--fiolet) 60%, #c04fd8);
           box-shadow: 0 8px 24px rgba(122, 60, 224, .28), 0 2px 6px rgba(47, 134, 222, .18); }
   .logo span { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
-               background: #fff; border: 3px solid #fff; }
+               background: #fff; border: 4px solid #fff; }
   .logo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.12); }
   h1 { margin: 8px 0 2px; font-size: 28px; background: linear-gradient(90deg, #2f86de, var(--fiolet));
        -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -72,6 +72,12 @@
   footer nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 14px; margin-top: 4px; }
   footer a { display: inline-block; padding: 6px 2px; }
   .pusto { text-align: center; color: var(--szary); padding: 30px; }
+
+  /* Tablet / małe okno: logo średnie. */
+  @media (max-width: 900px) {
+    .logo { width: 156px; height: 156px; padding: 4px; }
+    .logo span { border-width: 3px; }
+  }
 
   /* Telefon (ruch z Instagrama): 2 produkty w rzędzie, mniejsze logo, produkty na pierwszym ekranie. */
   @media (max-width: 600px) {
