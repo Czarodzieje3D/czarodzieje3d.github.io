@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Czarodzieje3D – katalog</title>
+<title>Czarodzieje3D</title>
 <meta name="description" content="Figurki i gadżety z drukarki 3D">
 
 <meta property="og:type" content="website">
@@ -140,6 +140,11 @@
   #powiekszenie div { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center;
                       justify-content: center; gap: 10px; padding: 16px; box-sizing: border-box; cursor: zoom-out; }
   #powiekszenie img { width: 100%; height: calc(100% - 50px); object-fit: contain; }
+  .ile-zdjec { position: absolute; left: 8px; bottom: 8px; padding: 2px 8px; border-radius: 12px; background: rgba(0,0,0,.45);
+               color: #fff; font-size: 12px; font-weight: 600; }
+  #powiekszenie .strzalka { top: 50%; margin-top: -21px; }
+  #powiekszenie .poprz { left: 10px; right: auto; }
+  #powiekszenie .nast { right: 10px; }
   #powiekszenie p { margin: 0; color: #fff; font-weight: 600; text-align: center; }
   #powiekszenie button { position: absolute; top: 12px; right: 12px; width: 42px; height: 42px; border-radius: 50%; border: 0;
                          background: rgba(255,255,255,.15); color: #fff; font-size: 24px; cursor: pointer; }
@@ -293,22 +298,45 @@
 
 <dialog id="powiekszenie" aria-label="Powiększone zdjęcie">
   <div><img alt=""><p></p></div>
-  <button type="button" aria-label="Zamknij">×</button>
+  <button type="button" class="zamknij" aria-label="Zamknij">×</button>
+  <button type="button" class="strzalka poprz" aria-label="Poprzednie zdjęcie" hidden>‹</button>
+  <button type="button" class="strzalka nast" aria-label="Następne zdjęcie" hidden>›</button>
 </dialog>
 <script>
-  // Klik w zdjęcie = powiększenie na cały ekran; klik gdziekolwiek / Esc / × zamyka.
+  // Klik w zdjęcie = powiększenie na cały ekran; przy kilku zdjęciach strzałki / przesunięcie palcem / ← →.
+  // Klik gdziekolwiek / Esc / × zamyka.
   // Bez JavaScriptu link otwiera samo zdjęcie w nowej karcie.
   (function () {
     var d = document.getElementById('powiekszenie');
     if (!d || !d.showModal) return;
-    var img = d.querySelector('img'), opis = d.querySelector('p');
+    var img = d.querySelector('img'), opis = d.querySelector('p'), poprz = d.querySelector('.poprz'),
+        nast = d.querySelector('.nast'), lista = [], nr = 0, nazwa = '', x0 = null;
+    function pokaz(i) {
+      nr = (i + lista.length) % lista.length;
+      img.src = lista[nr]; img.alt = nazwa;
+      opis.textContent = nazwa + (lista.length > 1 ? ' · ' + (nr + 1) + ' / ' + lista.length : '');
+    }
     document.querySelectorAll('a.foto').forEach(function (a) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        var maly = a.querySelector('img');
-        img.src = a.getAttribute('href'); img.alt = maly.alt; opis.textContent = maly.alt;
+        nazwa = a.querySelector('img').alt;
+        lista = a.dataset.galeria ? JSON.parse(a.dataset.galeria) : [a.getAttribute('href')];
+        poprz.hidden = nast.hidden = lista.length < 2;
+        pokaz(0);
         d.showModal();
       });
+    });
+    poprz.addEventListener('click', function (e) { e.stopPropagation(); pokaz(nr - 1); });
+    nast.addEventListener('click', function (e) { e.stopPropagation(); pokaz(nr + 1); });
+    d.addEventListener('keydown', function (e) {
+      if (lista.length < 2) return;
+      if (e.key === 'ArrowLeft') pokaz(nr - 1); else if (e.key === 'ArrowRight') pokaz(nr + 1);
+    });
+    img.addEventListener('touchstart', function (e) { x0 = e.changedTouches[0].clientX; }, { passive: true });
+    img.addEventListener('touchend', function (e) {
+      if (x0 === null || lista.length < 2) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 40) pokaz(nr + (dx < 0 ? 1 : -1));
     });
     d.addEventListener('click', function () { d.close(); });
   })();
